@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  client:
+    container_name: pondclient-test
+    build: ./frontend
+    ports:
+      - 3000:3000
+    working_dir: /app
+    tty: true
+  
+  server:
+    container_name: pondserver-test
+    build: ./backend
+    ports:
+      - 8088:8088
+    volumes:
+      - ./backend/data:/app/data

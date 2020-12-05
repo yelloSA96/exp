@@ -1,0 +1,59 @@
+### get all
+GET localhost:8088/api/schedule
+
+### get by consultant
+GET localhost:8088/api/schedule?consultant=2
+
+### get by type
+GET localhost:8088/api/schedule?type=interview
+
+### get by consultant and type
+GET localhost:8088/api/schedule?consultant=1&type=interview
+
+###
+POST localhost:8088/api/schedule/selflearning
+Content-Type: application/json
+
+{
+  "content": "self teaching",
+  "description": "yeah",
+  "dateToBeDone": "2077-05-01",
+  "consultantId": 2,
+  "skill": "java"
+}
+
+###
+POST localhost:8088/api/schedule/interview
+Content-Type: application/json
+
+{
+  "content": "an interview",
+  "consultantId": 2,
+  "time": "today",
+  "opportunityId": 1,
+  "date": "1818-09-01"
+}
+
+###
+DELETE localhost:8088/api/schedule?id=2
+
+###
+GET localhost:8088/api/skill
+
+###
+GET localhost:8088/api/skill?name=Java
+
+###
+DELETE localhost:8088/api/skill?name=Java
+
+###
+POST localhost:8088/api/skill?name=Driving
+
+###
+GET localhost:8088/api/opportunity
+
+###
+GET localhost:8088/api/opportunity?id=1
+
+###
+DELETE localhost:8088/api/opportunity?id=1
