@@ -1,23 +1,14 @@
-# FROM ruby:alpine3.12
-FROM ruby:2.7.2
+FROM ruby:alpine3.12
 COPY tabler-dev-2020-12-10 /tabler-dev
 
 WORKDIR /tabler-dev
-# TODO: fix up the below step
+# FROM alpine:3
+# RUN apk add --update --no-cache alpine-sdk ruby nodejs npm git
 # RUN npm install
-# RUN apk add --no-cache ruby
 # RUN gem install bundler
-# RUN bundle installer
+# RUN bundle install
 
-# Ruby approach with alpine 
-# RUN apk add --no-cache nodejs
-# RUN apk add --no-cache npm
-# RUN apk add --no-cache git
-# RUN npm install
-
-# Ruby 2.7.2
-
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apk add --update --no-cache alpine-sdk nodejs npm git
 RUN npm install
 RUN gem install bundler
 RUN bundle install
