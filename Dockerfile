@@ -1,6 +1,7 @@
 FROM alpine:3
-COPY tabler-dev-2020-12-10 /tabler
-WORKDIR /tabler
+# Donwload tabler zip files from https://github.com/tabler/tabler
+COPY tabler-dev /tabler-files
+WORKDIR /tabler-files
 RUN apk add --update --no-cache alpine-sdk ruby nodejs npm git
 RUN npm install
 RUN gem install bundler
