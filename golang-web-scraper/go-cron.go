@@ -13,6 +13,6 @@ func main() {
     my_scheduler := gocron.NewScheduler(time.UTC)
 
     my_scheduler.Every(5).Seconds().Do(My_Task_1)
-    my_scheduler.StartAsync()
-    my_scheduler.StartBlocking()
+    my_scheduler.StartAsync() // Mode 1
+    my_scheduler.StartBlocking() // Mode 2
 }
