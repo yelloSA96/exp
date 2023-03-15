@@ -4,7 +4,9 @@ import (
     "encoding/csv"
     "log"
     "os"
+    "time"
     "github.com/gocolly/colly"
+    "github.com/go-co-op/gocron"
 )
 
 type Book struct {
@@ -12,8 +14,8 @@ type Book struct {
     Price string
 }
 
-
-func main() {
+func BooksScraper() {
+    fmt.Println("Start Scrapping")
 
     // Create file
     file, err := os.Create("export.csv")
@@ -80,6 +82,13 @@ func main() {
     c.Visit("https://books.toscrape.com")
 
     fmt.Println("Done")
+}
+
+
+func main() {
+    my_scheduler := gocron.NewScheduler(time.UTC)
+    my_scheduler.Every(2).Minute().Do(BooksScraper)
+    my_scheduler.StartBlocking()
 }
 
 // Lessons Learnt
