@@ -5,5 +5,5 @@ go run hello-world.go
 
 ## Module Initialise
 ```bash
-go mod <module-name>
+go mod init <module-name>
 ```
