@@ -7,10 +7,12 @@ package main
 import (
     "fmt"
     "math/rand"
+    "rsc.io/quote"
 )
 
 // run code - go run hello-world.go
 func main() {
     fmt.Println("Hello World!")
     fmt.Println(rand.Intn(25))
+    fmt.Println(quote.Go())
 }
