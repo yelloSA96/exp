@@ -10,7 +10,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.List;
 
 public class realEstate {
-
+//    public static void extractSuburb(String[] toBeExported){
+//        File file = new File("append.txt");
+//        FileWriter fr = new FileWriter(file, true);
+//        fr.write("data");
+//        fr.close();
+//    }
 
     public static String[] extractDetails( WebElement data) {
         String[] result = new String[0];
@@ -33,7 +38,7 @@ public class realEstate {
         }else{
             sellingAll = data.findElement(By.className("css-43wvni")).getText();
         }
-        System.out.println(suburb + "," + street + "," + houseType + "," + bedrooms +","+sellingAll);
+        System.out.println(street + "," + suburb + "," + houseType + "," + bedrooms +","+sellingAll);
         return result;
     }
 
@@ -56,7 +61,7 @@ public class realEstate {
         try {
             driver.get("https://www.domain.com.au/auction-results/melbourne");
 
-            extractAlphaSection(driver,"div[id='A']");
+            extractAlphaSection(driver,"div[id='M']");
 
             System.out.println("Finished Extraction!");
         } finally {
