@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class realEstate {
@@ -50,7 +51,7 @@ public class realEstate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void execution(char character) {
 //        Chrome Settings
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
@@ -61,11 +62,18 @@ public class realEstate {
         try {
             driver.get("https://www.domain.com.au/auction-results/melbourne");
 
-            extractAlphaSection(driver,"div[id='M']");
+            extractAlphaSection(driver,"div[id='"+character+"']");
 
             System.out.println("Finished Extraction!");
         } finally {
             driver.quit();
+        }
+    }
+
+    public static void main(String[] args) {
+        char[] alphabet = {'A','B','C','D','E','F'};
+        for (char c : alphabet) {
+            execution(c);
         }
     }
 }
