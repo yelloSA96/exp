@@ -21,7 +21,7 @@ transcript = client.audio.transcriptions.create(
 
 print(transcript.text)
 
-# TODO: Doesn't work
+# TODO: Output the text into a file as new lines
 # from whisper.utils import get_writer
 output_directory = "./"
 # # Save as a TXT file without any line breaks
