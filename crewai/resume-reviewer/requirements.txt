@@ -1,0 +1,5 @@
+crewai==0.30.11
+crewai_tools==0.2.6
+langchain_community==0.2.0
+docx==0.2.4
+markdown==3.6
