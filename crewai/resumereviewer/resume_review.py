@@ -1,6 +1,7 @@
 from crewai import Agent, Task, Crew
 import os
-from utils import get_openai_api_key, get_serper_api_key,get_llama3, get_embedding
+
+from utils import get_openai_api_key, get_serper_api_key,get_llama3
 openai_api_key = get_openai_api_key()
 # os.environ["OPENAI_MODEL_NAME"] = 'gpt-4o'
 os.environ["SERPER_API_KEY"] = get_serper_api_key()

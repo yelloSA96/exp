@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv, find_dotenv
+from langchain_openai import ChatOpenAI
 from langchain_community.llms import Ollama
 # these expect to find a .env file at the directory above the lesson.
 def load_env():
