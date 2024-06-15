@@ -7,17 +7,14 @@ os.environ["SERPER_API_KEY"] = get_serper_api_key()
 from crewai_tools import (
   FileReadTool,
   ScrapeWebsiteTool,
-  MDXSearchTool,
+  TXTSearchTool,
   SerperDevTool
 )
-
-# The objective of this python project is to take a job description printout as markdown and align the resume accordingly
-# to the job description.
 
 search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()
 read_resume = FileReadTool(file_path='./resume.md')
-semantic_search_resume = MDXSearchTool(mdx='./resume.md',config=get_embedding())
+semantic_search_resume = TXTSearchTool(txt='./job-listing.md')
 
 researcher = Agent(
     role="Tech Job Researcher",
@@ -39,7 +36,7 @@ researcher = Agent(
 # Agent 2: Profiler
 profiler = Agent(
     role="Personal Profiler for Engineers",
-    goal="Do increditble research on job applicants "
+    goal="Do incredible research on job applicants "
          "to help them stand out in the job market",
     tools = [scrape_tool, search_tool,
              read_resume, semantic_search_resume],
@@ -141,7 +138,6 @@ resume_strategy_task = Task(
     agent=resume_strategist
 )
 
-
 interview_preparation_task = Task(
     description=(
         "Create a set of potential interview questions and talking "
@@ -175,8 +171,8 @@ job_application_crew = Crew(
 )
 
 job_application_inputs = {
-    'job_posting_url': 'https://jobs.lever.co/AIFund/6c82e23e-d954-4dd8-a734-c0c2c5ee00f1?lever-origin=applied&lever-source%5B%5D=AI+Fund',
-    'github_url': 'https://github.com/joaomdmoura',
+    'job_posting_url': 'https://www.linkedin.com/jobs/view/3894682615/?alternateChannel=search&refId=4XHdB8HG03I%2FwPHl2wJgww%3D%3D&trackingId=sJWdbsU0cbT2txeB5bKBag%3D%3D',
+    'github_url': 'https://github.com/yelloSA96',
     'personal_writeup': """Noah is an accomplished Software
     Engineering Leader with 18 years of experience, specializing in
     managing remote and in-office teams, and expert in multiple
