@@ -1,5 +1,6 @@
 # Perplexity Findings
 
+This is what 
 ```json
 ChatCompletion(
 id='c53862c8-9eb9-40d3-a232-7792e41be87b',
