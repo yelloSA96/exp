@@ -1,0 +1,25 @@
+{
+  "id": "a341b9b9-bf38-4701-8ac2-42e3d9dc531f",
+  "model": "llama-3-sonar-small-32k-online",
+  "created": 1721655814,
+  "usage": {
+    "prompt_tokens": 99,
+    "completion_tokens": 764,
+    "total_tokens": 863
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "To customize your Linux module on a Windows computer using the Windows Subsystem for Linux (WSL), follow these steps:\n\n### Prerequisites\n1. **Windows Version**: Ensure you are running Windows 10 version 2004 or higher (Build 19041 and higher) or Windows 11.\n2. **PowerShell or Command Prompt**: Open PowerShell or Windows Command Prompt in administrator mode.\n\n### Step-by-Step Guide\n\n#### 1. Enable WSL\nOpen PowerShell or Windows Command Prompt in administrator mode and run the following command to enable WSL and install the default Linux distribution (Ubuntu):\n\n```powershell\nwsl --install\n```\n\nThis command will enable the WSL features, download and install the latest Linux kernel, and set WSL 2 as the default. It will also download and install the Ubuntu Linux distribution. You may need to restart your machine during this process.\n\n#### 2. Install Additional Linux Distributions\nIf you want to install additional Linux distributions, you can do so using the following command:\n\n```powershell\nwsl --install -d <Distribution Name>\n```\n\nReplace `<Distribution Name>` with the name of the distribution you want to install. For example, to install Kali Linux:\n\n```powershell\nwsl --install -d kali\n```\n\nYou can also list available distributions using:\n\n```powershell\nwsl --list --online\n```\n\nTo install additional distributions from inside a Linux/Bash command line, use:\n\n```powershell\nwsl.exe --install -d <Distribution Name>\n```\n\nFor example:\n\n```powershell\nwsl.exe --install -d kali\n```\n\n#### 3. Set Up Your Linux User Info\nOnce you have installed WSL, you will need to create a user account and password for your newly installed Linux distribution. Open the Linux distribution (Ubuntu by default) using the Start menu. You will be asked to create a **User Name** and **Password** for your Linux distribution. This **User Name** and **Password** is specific to each separate Linux distribution and has no bearing on your Windows user name.\n\n#### 4. Add Custom Linux Distributions\nTo add custom Linux distributions, you can import any Linux distribution using a TAR file or install using an `.appx` file. You can also create your own custom Linux distribution to use with WSL. Follow the instructions on the Distro Launcher GitHub repo to create a custom Linux distro package.\n\n#### 5. Set Up Windows Terminal\nWindows Terminal can run any application with a command-line interface. It supports multiple tabs, panes, Unicode and UTF-8 character support, and a GPU-accelerated text rendering engine. You can customize it to your preferences. To set up Windows Terminal:\n\n1. **Install Windows Terminal**: Install Windows Terminal or Windows Terminal (Preview) from the Microsoft Store.\n2. **Customize Windows Terminal**: Use the Command Palette to set up custom actions like keyboard shortcuts, customize the appearance, and more. For detailed instructions, see the Windows Terminal docs.\n\n#### 6. File Storage and Best Practices\nTo open your WSL project in Windows File Explorer, enter:\n\n```bash\nexplorer.exe .\n```\n\nTo run Windows tools from within WSL, use the following command:\n\n```bash\nipconfig.exe\n```\n\nFor more detailed best practices, follow the guide on setting up a WSL development environment.\n\n### Troubleshooting\nIf you encounter any issues during the installation process, check the installation section of the troubleshooting guide provided by Microsoft.\n\nBy following these steps, you can customize your Linux module on a Windows computer and take full advantage of the Windows Subsystem for Linux."
+      },
+      "delta": {
+        "role": "assistant",
+        "content": ""
+      }
+    }
+  ]
+}
