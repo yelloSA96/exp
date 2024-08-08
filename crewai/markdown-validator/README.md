@@ -15,3 +15,7 @@ This example uses the OpenAI API to call a model. This can be through a locally 
 
 ## License
 This project is released under the MIT License.
+
+## Dependencies
+pymarkdown
+crewai

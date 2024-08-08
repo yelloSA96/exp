@@ -5,17 +5,13 @@ from utils import get_openai_api_key, get_serper_api_key,get_llama3
 openai_api_key = get_openai_api_key()
 # os.environ["OPENAI_MODEL_NAME"] = 'gpt-4o'
 os.environ["SERPER_API_KEY"] = get_serper_api_key()
-from crewai_tools import (
-  FileReadTool,
-  ScrapeWebsiteTool,
-  TXTSearchTool,
-  SerperDevTool
-)
+
+from crewai_tools import FileReadTool,ScrapeWebsiteTool,SerperDevTool
 
 search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()
 read_resume = FileReadTool(file_path='./resume.md')
-semantic_search_resume = TXTSearchTool(txt='./job-listing.md')
+# semantic_search_resume = TXTSearchTool(txt='./job-listing.md') # No longer needed due to other scraping tool
 
 researcher = Agent(
     role="Tech Job Researcher",
@@ -40,7 +36,7 @@ profiler = Agent(
     goal="Do incredible research on job applicants "
          "to help them stand out in the job market",
     tools = [scrape_tool, search_tool,
-             read_resume, semantic_search_resume],
+             read_resume],
     verbose=True,
     llm=get_llama3(),
     backstory=(
@@ -57,7 +53,7 @@ resume_strategist = Agent(
     goal="Find all the best ways to make a "
          "resume stand out in the job market.",
     tools = [scrape_tool, search_tool,
-             read_resume, semantic_search_resume],
+             read_resume],
     verbose=True,
     llm=get_llama3(),
     backstory=(
@@ -73,7 +69,7 @@ interview_preparer = Agent(
     goal="Create interview questions and talking points "
          "based on the resume and job requirements",
     tools = [scrape_tool, search_tool,
-             read_resume, semantic_search_resume],
+             read_resume],
     verbose=True,
     llm=get_llama3(),
     backstory=(
@@ -126,8 +122,8 @@ resume_strategy_task = Task(
         "relevant areas. Employ tools to adjust and enhance the "
         "resume content. Make sure this is the best resume even but "
         "don't make up any information. Update every section, "
-        "inlcuding the initial summary, work experience, skills, "
-        "and education. All to better reflrect the candidates "
+        "including the initial summary, work experience, skills, "
+        "and education. All to better reflect the candidates "
         "abilities and how it matches the job posting."
     ),
     expected_output=(
@@ -145,7 +141,7 @@ interview_preparation_task = Task(
         "points based on the tailored resume and job requirements. "
         "Utilize tools to generate relevant questions and discussion "
         "points. Make sure to use these question and talking points to "
-        "help the candiadte highlight the main points of the resume "
+        "help the candidate highlight the main points of the resume "
         "and how it matches the job posting."
     ),
     expected_output=(
@@ -172,19 +168,16 @@ job_application_crew = Crew(
 )
 
 job_application_inputs = {
-    'job_posting_url': 'https://www.linkedin.com/jobs/view/3894682615/?alternateChannel=search&refId=4XHdB8HG03I%2FwPHl2wJgww%3D%3D&trackingId=sJWdbsU0cbT2txeB5bKBag%3D%3D',
+    'job_posting_url': 'https://www.linkedin.com/jobs/view/3982875041/',
     'github_url': 'https://github.com/yelloSA96',
-    'personal_writeup': """Noah is an accomplished Software
-    Engineering Leader with 18 years of experience, specializing in
-    managing remote and in-office teams, and expert in multiple
-    programming languages and frameworks. He holds an MBA and a strong
-    background in AI and data science. Noah has successfully led
-    major tech initiatives and startups, proving his ability to drive
-    innovation and growth in the tech industry. Ideal for leadership
-    roles that require a strategic and innovative approach."""
+    'personal_writeup': """A devoted traditional engineer turned software. 
+    Currently, my aspirations is to creating tools and create automated workflow that are refined for my stakeholders (devs & support).
+    I also have a deep passion for sharing knowledge and learning challenging skills ensuring me and my team are constantly growing."""
 }
 
-result = job_application_crew.kickoff(inputs=job_application_inputs)
+
+if __name__ == "__main__":
+    result = job_application_crew.kickoff(inputs=job_application_inputs)
 
 
 # from IPython.display import Markdown, display

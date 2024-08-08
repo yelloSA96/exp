@@ -49,8 +49,8 @@ class Perplexity(BaseTool):
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "authorization": f"Bearer <API-KEY>"
-
+            # "authorization": f"Bearer <API-KEY>"
+            "authorization": f"Bearer  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"
         }
         response = requests.post(url, json=payload, headers=headers)
         print(response)
