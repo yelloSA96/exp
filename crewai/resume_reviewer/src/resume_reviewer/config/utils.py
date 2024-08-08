@@ -18,5 +18,5 @@ def get_serper_api_key():
 
 def get_llama3():
     return ChatOpenAI(
-    model = "llama3",
+    model = "llama3:8b",
     base_url = "http://localhost:11434/v1")

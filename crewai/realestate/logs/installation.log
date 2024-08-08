@@ -1,0 +1,18 @@
+Microsoft Windows [Version 10.0.22631.3880]
+(c) Microsoft Corporation. All rights reserved.
+
+(.venv) C:\>poetry lock
+Updating dependencies
+Resolving dependencies... (64.4s)
+
+Writing lock file
+
+(.venv) C:\>poetry install
+Installing dependencies from lock file
+
+Package operations: 0 installs, 2 updates, 0 removals
+
+  - Updating setuptools (68.2.0 -> 72.1.0)
+  - Updating openai (1.35.13 -> 1.38.0)
+
+Installing the current project: realestate (0.1.0)

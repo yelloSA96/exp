@@ -21,8 +21,8 @@ class Document2Markdown:
             f.write(md)
 
 
-import unittest
 
+import unittest
 class TestDocument2Markdown(unittest.TestCase):
     def setUp(self):
         self.doc2md = Document2Markdown('test.docx')
