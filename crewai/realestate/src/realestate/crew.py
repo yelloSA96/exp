@@ -1,20 +1,24 @@
+import os
+
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from .tools.scrape_website import scrapeWebsiteTool
 from .tools.Perplexity import Perplexity
-
+from langchain_groq import ChatGroq
 
 @CrewBase
 class RealestateCrew():
 	"""Realestate crew"""
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
+	# groqllm = ChatGroq(api_key=os.getenv('GROQ_API_KEY'), model_name="llama3-70b-8192")
 
 	@agent
 	def researcher(self) -> Agent:
 		return Agent(
 			config=self.agents_config['researcher'],
 			tools=[scrapeWebsiteTool(website_url='https://www.domain.com.au/auction-results/melbourne'),Perplexity()],
+			# llm=self.groqllm,
 			verbose=True
 		)
 
@@ -23,6 +27,7 @@ class RealestateCrew():
 		return Agent(
 			config=self.agents_config['real_estate_agent'],
 			tools=[Perplexity()],
+			# llm=self.groqllm,
 			verbose=True
 		)
 

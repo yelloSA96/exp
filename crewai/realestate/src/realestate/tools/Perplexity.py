@@ -49,19 +49,35 @@ class Perplexity(BaseTool):
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            # "authorization": f"Bearer <API-KEY>"
-            "authorization": f"Bearer  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"
+            "authorization": f"Bearer {os.getenv('PERPLEXITY_API_KEY')}"
         }
-        response = requests.post(url, json=payload, headers=headers)
-        print(response)
-        return response.json()
+        try:
+            response = requests.post(url, json=payload, headers=headers)
+            response.raise_for_status()  # Raise an error for bad status codes
+            if response.content:
+                return response.json()
+            else:
+                print("Empty response content")
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return None
+        except ValueError as e:
+            print(f"JSON decoding failed: {e}")
+            print(f"Response content: {response.text}")
+            return None
 
     def _run(self, **kwargs: Any) -> str:
         search_query = kwargs.get('search_query') or kwargs.get('query')
         if search_query is not None:
             self.messages.append(self.User(search_query))
+        else:
+            return None
         api_response = self.chat_completion_non_streaming()
-        return api_response['choices'][0]['message']['content']
+        if api_response and 'choices' in api_response:
+            return api_response['choices'][0]['message']['content']
+        else:
+            raise ValueError(f"API response does not contain 'choices': {api_response}")
 
 if __name__ == "__main__":
     tool = Perplexity()
