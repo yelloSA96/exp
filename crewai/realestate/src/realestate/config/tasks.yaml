@@ -1,0 +1,15 @@
+research_task:
+  description: >
+    Conduct a thorough research about the property market for {suburb} suburb.
+    Make sure you find any interesting and relevant information about the suburb and any properties that were undervalued given
+    the current year is 2024 and month is August.
+  expected_output: >
+    A tabulated list of auctions in {suburb} suburb that were undervalued and should be further investigated. 
+
+reporting_task:
+  description: >
+    Review the context you got and provide a report detailing on property comparison against the current market.
+    Make sure the report is detailed and contains any and all relevant information. Being mindful that the current year is 2024 and month is August.
+  expected_output: >
+    A fully fledge reports about {suburb} and expressing your opinion of purchasing an undervalued property in {suburb}.
+    Formatted as markdown without '```'
