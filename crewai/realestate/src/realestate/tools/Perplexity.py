@@ -2,6 +2,7 @@ import os
 from typing import Any, Type
 from crewai_tools import BaseTool
 import requests
+from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
 
@@ -41,6 +42,7 @@ class Perplexity(BaseTool):
 
     def chat_completion_non_streaming(self):
         """'chat completion (non-streaming)"""
+        load_dotenv('.env') # TODO: This doesn't work yet
         url = "https://api.perplexity.ai/chat/completions"
         payload = {
             "model": "llama-3.1-sonar-large-128k-online",
@@ -50,6 +52,7 @@ class Perplexity(BaseTool):
             "accept": "application/json",
             "content-type": "application/json",
             "authorization": f"Bearer {os.getenv('PERPLEXITY_API_KEY')}"
+            # "authorization": f"Bearer {os.getenv('PERPLEXITY_API_KEY')}" TODO: Fix
         }
         try:
             response = requests.post(url, json=payload, headers=headers)
