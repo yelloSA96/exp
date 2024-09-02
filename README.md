@@ -6,3 +6,4 @@ exp -> own_repository
 | Branch                     | Description                          |
 |----------------------------|--------------------------------------|
 | restful-crud-api-tutorial  | Create a RESTful CRUD Api in Golang  |
+| smart-autogen-convo | With the discovery of anime characters having a description about their personality. Why can't we put that as an AI persona. | 
