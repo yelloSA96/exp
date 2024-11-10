@@ -1,0 +1,13 @@
+(.venv) C:\>crewai create realestate
+Creating folder realestate...
+  - Created realestate\.gitignore
+  - Created realestate\pyproject.toml
+  - Created realestate\README.md
+  - Created realestate\src\realestate\__init__.py
+  - Created realestate\src\realestate\main.py
+  - Created realestate\src\realestate\crew.py
+  - Created realestate\src\realestate\tools\custom_tool.py
+  - Created realestate\src\realestate\tools\__init__.py
+  - Created realestate\src\realestate\config\agents.yaml
+  - Created realestate\src\realestate\config\tasks.yaml
+Crew realestate created successfully!
