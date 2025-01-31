@@ -11,19 +11,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class realEstate {
-    public static void exportToFile(String[] toBeExported) throws IOException {
+    public void exportToFile(ArrayList<String> propertyListingDetails) throws IOException {
         File file = new File(LocalDate.now().toString() + ".txt");
-        FileWriter fr = new FileWriter(file, true);
-        fr.write("data");
-        fr.close();
+        try (FileWriter fr = new FileWriter(file, true)) {
+        for (String data : propertyListingDetails) {
+            fr.write(data + ',');
+        }
+        fr.write(System.lineSeparator());
+        }
     }
 
-    public static String[] extractDetails( WebElement data) {
-        String[] result = new String[0];
+    public void extractDetails(WebElement data) {
+        ArrayList<String> result = new ArrayList<String>();
 
         WebElement suburbSection = data.findElement(By.className("css-1pdlxcs")); // Header section
         String suburb = suburbSection.findElement(By.tagName("h3")).getText();
@@ -43,20 +46,29 @@ public class realEstate {
         }else{
             sellingAll = data.findElement(By.className("css-43wvni")).getText();
         }
-        System.out.println(street + "," + suburb + "," + houseType + "," + bedrooms +","+sellingAll);
-//        Export the findings to a json/csv format file
-        return result;
-    }
 
-    public static void extractAlphaSection(WebDriver driver, String alaphabeticalSection) {
-        WebElement sections  = driver.findElement(By.cssSelector(alaphabeticalSection));
-        List<WebElement> listings = sections.findElements(By.className("css-3xqrp1"));
-        for (WebElement listing : listings) {
-            String[] details = extractDetails(listing);
+        result.add(street);
+        result.add(suburb);
+        result.add(houseType);
+        result.add(bedrooms);
+        result.add(sellingAll);
+        System.out.println(street + "," + suburb + "," + houseType + "," + bedrooms +","+sellingAll);
+        try {
+            exportToFile(result);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static void execution() {
+    public void extractAlphaSection(WebDriver driver, String alaphabeticalSection) {
+        WebElement sections  = driver.findElement(By.cssSelector(alaphabeticalSection));
+        List<WebElement> listings = sections.findElements(By.className("css-3xqrp1"));
+        for (WebElement listing : listings) {
+            extractDetails(listing);
+        }
+    }
+
+    public void execution() {
 //        Chrome Settings
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
@@ -78,7 +90,4 @@ public class realEstate {
         }
     }
 
-    public static void main(String[] args) {
-        execution();
-    }
 }
