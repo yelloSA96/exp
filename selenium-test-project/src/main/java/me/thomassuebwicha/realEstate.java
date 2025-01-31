@@ -7,16 +7,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
 public class realEstate {
-//    public static void extractSuburb(String[] toBeExported){
-//        File file = new File("append.txt");
-//        FileWriter fr = new FileWriter(file, true);
-//        fr.write("data");
-//        fr.close();
-//    }
+    public static void exportToFile(String[] toBeExported) throws IOException {
+        File file = new File(LocalDate.now().toString() + ".txt");
+        FileWriter fr = new FileWriter(file, true);
+        fr.write("data");
+        fr.close();
+    }
 
     public static String[] extractDetails( WebElement data) {
         String[] result = new String[0];
@@ -40,6 +44,7 @@ public class realEstate {
             sellingAll = data.findElement(By.className("css-43wvni")).getText();
         }
         System.out.println(street + "," + suburb + "," + houseType + "," + bedrooms +","+sellingAll);
+//        Export the findings to a json/csv format file
         return result;
     }
 
@@ -51,7 +56,7 @@ public class realEstate {
         }
     }
 
-    public static void execution(char character) {
+    public static void execution() {
 //        Chrome Settings
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
@@ -59,11 +64,14 @@ public class realEstate {
 
 
         WebDriver driver = new ChromeDriver(chromeOptions);
+        char[] alphabet = {'A','B','C','D','E','F'};
+
         try {
             driver.get("https://www.domain.com.au/auction-results/melbourne");
 
-            extractAlphaSection(driver,"div[id='"+character+"']");
-
+            for (char character : alphabet) {
+                extractAlphaSection(driver, "div[id='" + character + "']");
+            }
             System.out.println("Finished Extraction!");
         } finally {
             driver.quit();
@@ -71,9 +79,6 @@ public class realEstate {
     }
 
     public static void main(String[] args) {
-        char[] alphabet = {'A','B','C','D','E','F'};
-        for (char c : alphabet) {
-            execution(c);
-        }
+        execution();
     }
 }
