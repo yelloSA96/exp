@@ -1,7 +1,6 @@
-package me.thomassuebwicha;
+package me.thomassuebwicha.service;
 
 import me.thomassuebwicha.domain.Product;
-import org.apache.commons.exec.util.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;

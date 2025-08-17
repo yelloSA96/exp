@@ -1,4 +1,4 @@
-package me.thomassuebwicha;
+package me.thomassuebwicha.service;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
