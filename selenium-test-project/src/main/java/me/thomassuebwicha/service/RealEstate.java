@@ -1,5 +1,6 @@
 package me.thomassuebwicha.service;
 
+import me.thomassuebwicha.domain.property.Property;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class realEstate {
+public class RealEstate {
+    private WebDriver driver;
+
+    public RealEstate() {
+    }
+
     public void exportToFile(ArrayList<String> propertyListingDetails) throws IOException {
         File file = new File(LocalDate.now().toString() + ".txt");
         try (FileWriter fr = new FileWriter(file, true)) {
@@ -25,8 +31,7 @@ public class realEstate {
         }
     }
 
-    public void extractDetails(WebElement data) {
-        ArrayList<String> result = new ArrayList<String>();
+    public Property extractDetails(WebElement data) {
 
         WebElement suburbSection = data.findElement(By.className("css-1pdlxcs")); // Header section
         String suburb = suburbSection.findElement(By.tagName("h3")).getText();
@@ -37,7 +42,7 @@ public class realEstate {
         String houseType = houseTypeSection.findElement(By.tagName("span")).getText();
 
         WebElement bedroomSection = houseTypeSection.findElement(By.className("css-1g2pbs1")); // house type section
-        String bedrooms = bedroomSection.getText();
+        String bedrooms = bedroomSection.getText().replaceAll(" beds?","");
 
         String sellingAll;
         if ( data.findElements(By.className("css-43wvni")).isEmpty() ){
@@ -47,47 +52,37 @@ public class realEstate {
             sellingAll = data.findElement(By.className("css-43wvni")).getText();
         }
 
-        result.add(street);
-        result.add(suburb);
-        result.add(houseType);
-        result.add(bedrooms);
-        result.add(sellingAll);
-        System.out.println(street + "," + suburb + "," + houseType + "," + bedrooms +","+sellingAll);
-        try {
-            exportToFile(result);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        return new Property(street, suburb, houseType,Integer.parseInt(bedrooms),sellingAll);
     }
 
-    public void extractAlphaSection(WebDriver driver, String alaphabeticalSection) {
+    public ArrayList<Property> extractAlphaSection(WebDriver driver, String alaphabeticalSection) {
         WebElement sections  = driver.findElement(By.cssSelector(alaphabeticalSection));
         List<WebElement> listings = sections.findElements(By.className("css-3xqrp1"));
+        ArrayList<Property> propertiesInAlphaSection = new ArrayList<>();
         for (WebElement listing : listings) {
-            extractDetails(listing);
+            propertiesInAlphaSection.add(extractDetails(listing));
         }
+        return propertiesInAlphaSection;
     }
 
-    public void execution() {
-//        Chrome Settings
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-
-
-        WebDriver driver = new ChromeDriver(chromeOptions);
+    public ArrayList<Property> scrapeData() {
         char[] alphabet = {'A','B','C','D','E','F'};
-
+        ArrayList<Property> result = new ArrayList<>();
         try {
             driver.get("https://www.domain.com.au/auction-results/melbourne");
-
             for (char character : alphabet) {
-                extractAlphaSection(driver, "div[id='" + character + "']");
+                ArrayList<Property> alphabeticalSectionOfProperties = extractAlphaSection(driver, "div[id='" + character + "']");
+                result.addAll(alphabeticalSectionOfProperties);
             }
             System.out.println("Finished Extraction!");
+            return result;
         } finally {
             driver.quit();
         }
     }
 
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
 }
