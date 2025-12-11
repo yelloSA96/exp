@@ -34,3 +34,5 @@ task-master init
    │   * Use the task-master command without arguments to see all available commands. 
 ```
 
+## Task Master Documentation
+[Creating your own PRD with AI](https://docs.task-master.dev/getting-started/quick-start/prd-quick#where-to-save-your-prd)
