@@ -85,3 +85,5 @@ nb-configuration.xml
 
 
 **/.venv/****
+**/node_modules/**
+**/.env
