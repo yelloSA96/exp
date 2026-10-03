@@ -4,7 +4,7 @@
     <module name="selenium-test-project" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="me.thomassuebwicha.*" />
+        <option name="PATTERN" value="me.thomassuebwicha.service.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

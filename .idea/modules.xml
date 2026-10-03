@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/cc-meta-creation/.idea/cc-meta-creation.iml" filepath="$PROJECT_DIR$/cc-meta-creation/.idea/cc-meta-creation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cc-video-editing/.idea/cc-video-editing.iml" filepath="$PROJECT_DIR$/cc-video-editing/.idea/cc-video-editing.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/exp.iml" filepath="$PROJECT_DIR$/.idea/exp.iml" />
     </modules>
   </component>
