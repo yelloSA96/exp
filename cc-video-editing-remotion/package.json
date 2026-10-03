@@ -9,5 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.6.2"
+  "packageManager": "pnpm@10.6.2",
+  "dependencies": {
+    "@remotion/skills": "github:remotion-dev/skills",
+    "skills": "^1.7.0"
+  }
 }
